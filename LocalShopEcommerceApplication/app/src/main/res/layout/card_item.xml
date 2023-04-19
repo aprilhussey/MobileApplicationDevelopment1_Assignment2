@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/cardBasket"
+    android:layout_width="185dp"
+    android:layout_height="315dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/imgItem"
+            android:layout_width="165dp"
+            android:layout_height="165dp"
+            app:srcCompat="@drawable/placeholder"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/txtItemName"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:text="Item Name"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgItem"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/txtItemPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="£1.00"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtItemName"
+            app:layout_constraintBottom_toTopOf="@id/txtItemVer"
+            android:layout_marginStart="10dp" />
+
+        <TextView
+            android:id="@+id/txtItemVer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VER:"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtItemPrice"
+            app:layout_constraintBottom_toTopOf="@+id/btnAddItemToWishlist"
+            android:layout_marginStart="10dp" />
+
+        <Spinner
+            android:id="@+id/spnItemVerTxt"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toEndOf="@id/txtItemVer"
+            app:layout_constraintTop_toTopOf="@id/txtItemVer"
+            app:layout_constraintBottom_toBottomOf="@id/txtItemVer"
+            android:layout_marginStart="10dp" />
+
+        <ImageButton
+            android:id="@+id/btnAddItemToWishlist"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/placeholder"
+
+            app:layout_constraintEnd_toStartOf="@id/btnAddItemToBasket"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="5dp"/>
+
+        <ImageButton
+            android:id="@+id/btnAddItemToBasket"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/placeholder"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/txtItemStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In Stock"
+            android:textSize="10sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="10dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
