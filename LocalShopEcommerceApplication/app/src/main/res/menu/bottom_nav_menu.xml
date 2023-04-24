@@ -14,7 +14,7 @@
     <item
         android:id="@+id/navBasket"
         android:icon="@drawable/placeholder"
-        android:title="Home" />
+        android:title="Basket" />
 
     <item
         android:id="@+id/navWishlist"
