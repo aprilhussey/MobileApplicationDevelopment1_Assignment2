@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navHome"
+        android:icon="@drawable/placeholder"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navShop"
+        android:icon="@drawable/placeholder"
+        android:title="Shop" />
+
+    <item
+        android:id="@+id/navBasket"
+        android:icon="@drawable/placeholder"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navWishlist"
+        android:icon="@drawable/placeholder"
+        android:title="Wishlist" />
+
+    <item
+        android:id="@+id/navAccount"
+        android:icon="@drawable/placeholder"
+        android:title="Account" />
+
+</menu>
