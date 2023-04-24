@@ -1,27 +1,25 @@
 package com.example.localshopecommerceapplication;
 
-import android.media.Image;
-
 public class BasketModel {
-    Image itemImage;
+    int itemImage;
     String itemName;
     String itemPrice;
-    String[] itemVersions;
+    String itemVer;
 
     // Constructor
-    public BasketModel(Image itemImage, String itemName, String itemPrice, String[] itemVersions) {
+    public BasketModel(int itemImage, String itemName, String itemPrice, String itemVer) {
         this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
-        this.itemVersions = itemVersions;
+        this.itemVer = itemVer;
     }
 
     // Getters and setters
-    public Image getItemImage() {
+    public int getItemImage() {
         return itemImage;
     }
 
-    public void setItemImage(Image itemImage) {
+    public void setItemImage(int itemImage) {
         this.itemImage = itemImage;
     }
 
@@ -41,11 +39,11 @@ public class BasketModel {
         this.itemPrice = itemPrice;
     }
 
-    public String[] getItemVersions() {
-        return itemVersions;
+    public String getItemVer() {
+        return itemVer;
     }
 
-    public void setItemVersions(String[] itemVersions) {
-        this.itemVersions = itemVersions;
+    public void setItemVer(String itemVer) {
+        this.itemVer = itemVer;
     }
 }
