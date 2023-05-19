@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class RegisterActivity extends AppCompatActivity {
-
+    // Declare variables
     TextInputEditText edtFirstName;
     TextInputEditText edtLastName;
     TextInputEditText edtEmail;

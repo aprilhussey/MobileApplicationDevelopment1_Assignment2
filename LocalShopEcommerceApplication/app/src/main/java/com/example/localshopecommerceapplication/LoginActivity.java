@@ -11,7 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
-
+    // Declare variables
     TextInputEditText edtEmail;
     TextInputEditText edtPassword;
     Button btnLogin;
