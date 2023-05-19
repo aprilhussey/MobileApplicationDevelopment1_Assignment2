@@ -1,5 +1,6 @@
 package com.example.localshopecommerceapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,5 +62,26 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_account, container, false);
+    }
+
+    Button btnLogout;
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Initialise variables
+        btnLogout = view.findViewById(R.id.btnLogout);
+
+        boolean loggedIn = LoginUtils.getLoginStatus(getContext());
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginUtils.setLoginStatus(getContext(), false);
+                Intent intentLogin = new Intent(getContext(), LoginActivity.class);
+                startActivity(intentLogin);
+            }
+        });
     }
 }
