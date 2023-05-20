@@ -2,6 +2,7 @@ package com.example.localshopecommerceapplication;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -24,9 +25,12 @@ public class DatabaseConnect extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String query = "create table " + dbTable + " (INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + firstName + " TEXT, " + lastName + " TEXT, " + email + " TEXT, " + password + " TEXT)";
+        String query = "create table " + dbTable + " (" + firstName + " TEXT, " + lastName
+                + " TEXT, " + email + " TEXT PRIMARY KEY, " + password + " TEXT)";
         sqLiteDatabase.execSQL(query);
+
+        User adminUser = new User("Admin", "Account", "admin@email.com", "account");
+        addUser(adminUser);
     }
 
     @Override
@@ -38,11 +42,49 @@ public class DatabaseConnect extends SQLiteOpenHelper {
     public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+
         values.put(firstName, user.getFirstName());
         values.put(lastName, user.getLastName());
         values.put(email, user.getEmail());
         values.put(password, user.getPassword());
 
         db.insert(dbTable, null, values);
+    }
+
+    public boolean checkIfEmailExists(String emailToCheck) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + dbTable + " WHERE " + email + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{emailToCheck});
+
+        if (cursor.getCount() <= 0) {
+            // Email does not exist
+            cursor.close();
+            return false;
+        }
+        else {
+            // Email exists
+            cursor.close();
+            return true;
+        }
+    }
+
+    public String passwordCheck(String emailToCheck) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + dbTable + " WHERE " + email + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{emailToCheck});
+
+        if (cursor.moveToFirst()) {
+            // Email exists
+            String passwordInDb = cursor.getString(cursor.getColumnIndex(password));
+            cursor.close();
+            return passwordInDb;
+        }
+        else {
+            // Email does not exist
+            cursor.close();
+            return null;
+        }
     }
 }

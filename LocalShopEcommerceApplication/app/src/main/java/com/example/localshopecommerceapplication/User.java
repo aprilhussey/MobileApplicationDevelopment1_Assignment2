@@ -7,7 +7,7 @@ public class User {
     private String firstName;
     private String lastName;
 
-    public User(String email, String password, String firstName, String lastName)
+    public User(String firstName, String lastName, String email, String password)
     {
         // Initialise variables
         this.firstName = firstName;
@@ -18,11 +18,7 @@ public class User {
     }
 
     // Getter and setter functions
-    public String getEmail() {
-        return email;
-    }
-
-    public String getFirstName() {
+   public String getFirstName() {
         return firstName;
     }
 
@@ -36,6 +32,10 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {

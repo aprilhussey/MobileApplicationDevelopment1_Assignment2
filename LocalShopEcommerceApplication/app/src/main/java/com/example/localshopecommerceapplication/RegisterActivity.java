@@ -31,18 +31,36 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnLogin = findViewById(R.id.btnLogin);
 
+        DatabaseConnect dbConnect = new DatabaseConnect(RegisterActivity.this);
+
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // check if email exists
-                    // if yes; account already exists
-                    // else; registerSuccessful
+                String strFirstName = edtFirstName.getText().toString();
+                String strLastName = edtLastName.getText().toString();
+                String strEmail = edtEmail.getText().toString();
+                String strPassword = edtPassword.getText().toString();
 
-                // TESTING PURPOSES JUST WORK FOR NOW
-                LoginUtils.setLoginStatus(RegisterActivity.this, true);
+                if (strFirstName.isEmpty() || strLastName.isEmpty() || strEmail.isEmpty() || strPassword.isEmpty()) {
+                    //txtDisplayInfo.setText("All fields are required")
+                }
+                else {
+                    boolean emailExists = dbConnect.checkIfEmailExists(strEmail);
 
-                Intent intentHome = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(intentHome);
+                    if (emailExists)
+                    {
+                        //txtDisplayInfo.setText("Account already exists");
+                    }
+                    else {
+                        User newUser = new User(strFirstName, strLastName, strEmail, strPassword);
+                        dbConnect.addUser(newUser);
+
+                        LoginUtils.setLoginStatus(RegisterActivity.this, true);
+
+                        Intent intentHome = new Intent(RegisterActivity.this, MainActivity.class);
+                        startActivity(intentHome);
+                    }
+                }
             }
         });
 
