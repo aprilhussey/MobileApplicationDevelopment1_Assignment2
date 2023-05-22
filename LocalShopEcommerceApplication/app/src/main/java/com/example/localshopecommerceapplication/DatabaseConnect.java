@@ -31,6 +31,9 @@ public class DatabaseConnect extends SQLiteOpenHelper {
 
         User adminUser = new User("Admin", "Account", "admin@email.com", "account");
         addUser(adminUser);
+
+        User userUser = new User("User", "Account", "user@email.com", "account");
+        addUser(userUser);
     }
 
     @Override
