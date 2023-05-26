@@ -47,8 +47,6 @@ public class BasketFragment extends Fragment {
         return fragment;
     }
 
-    Button btnLogOut;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

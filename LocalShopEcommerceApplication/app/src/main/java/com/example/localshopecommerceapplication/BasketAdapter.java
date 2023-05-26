@@ -25,14 +25,14 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
     @NonNull
     @Override
     public BasketAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // to inflate the layout for each item of recycler view.
+        // To inflate the layout for each item of recycler view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_basket, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull BasketAdapter.ViewHolder holder, int position) {
-        // to set data to textview and imageview of each card layout
+        // To set data to textview and imageview of each card layout
         BasketModel model = basketModels.get(position);
         holder.imgItem.setImageResource(model.getItemImage());
         holder.txtItemName.setText(model.getItemName());
@@ -42,7 +42,7 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        // this method is used for showing number of card items in recycler view
+        // This method is used for showing number of card items in recycler view
         return basketModels.size();
     }
 

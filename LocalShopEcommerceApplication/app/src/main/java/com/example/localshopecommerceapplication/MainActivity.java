@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     if (itemId == R.id.navHome) {
                         selectedFragment = new HomeFragment();
                     } else if (itemId == R.id.navShop) {
-                        selectedFragment = new ShopFragment();
+                        selectedFragment = new CategoriesFragment();
                     } else if (itemId == R.id.navBasket) {
                         selectedFragment = new BasketFragment();
                     } else if (itemId == R.id.navWishlist) {
