@@ -1,10 +1,8 @@
 package com.example.localshopecommerceapplication;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,11 +13,10 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CategoriesFragment#newInstance} factory method to
+ * Use the {@link ShopFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CategoriesFragment extends Fragment {
-    private View view;
+public class ShopFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +27,7 @@ public class CategoriesFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public CategoriesFragment() {
+    public ShopFragment() {
         // Required empty public constructor
     }
 
@@ -43,8 +40,8 @@ public class CategoriesFragment extends Fragment {
      * @return A new instance of fragment ShopFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CategoriesFragment newInstance(String param1, String param2) {
-        CategoriesFragment fragment = new CategoriesFragment();
+    public static ShopFragment newInstance(String param1, String param2) {
+        ShopFragment fragment = new ShopFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -53,17 +50,10 @@ public class CategoriesFragment extends Fragment {
     }
 
     // Declare variables
-    DatabaseConnect dbConnect;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        dbConnect = new DatabaseConnect(getContext());
-    }
-
-    // Declare variables
     RecyclerView recyclerView;
-    CategoryAdapter categoryAdapter;
+    ArrayList<ItemModel> itemModelArrayList;
+    ItemAdapter itemAdapter;
+    DatabaseConnect dbConnect = new DatabaseConnect(getContext());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,31 +62,21 @@ public class CategoriesFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        setupRecyclerView();
+    }
+
+    public void setupRecyclerView() {
+        itemModelArrayList = new ArrayList<>();    // Create new array list and add data to it
+        itemModelArrayList = dbConnect.getAllItems();
+
+        itemAdapter = new ItemAdapter(getContext(), itemModelArrayList);    // Initialise adapter class and pass array list to it
+        recyclerView.setAdapter(itemAdapter);   // Set adapter to recycler view
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_categories, container, false);
-
-        // Get a reference to the recycler view
-        recyclerView = view.findViewById(R.id.recyclerView);
-
-        // Setup the recycler view
-        setupRecyclerView();
-
-        return view;
-    }
-
-    public void setupRecyclerView() {
-        // Create new array list and add data to it
-        ArrayList<CategoryModel> categoryModelArrayList = dbConnect.getAllCategories();
-        for (CategoryModel category : categoryModelArrayList) {
-            System.out.println(category.getCategoryName());
-        }
-
-        categoryAdapter = new CategoryAdapter(getContext(), categoryModelArrayList);    // Initialise adapter class and pass array list to it
-        recyclerView.setAdapter(categoryAdapter);   // Set adapter to recycler view
+        return inflater.inflate(R.layout.fragment_shop, container, false);
     }
 }

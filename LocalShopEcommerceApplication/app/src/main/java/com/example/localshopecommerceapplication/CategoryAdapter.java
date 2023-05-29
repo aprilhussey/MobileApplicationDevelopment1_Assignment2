@@ -1,19 +1,21 @@
 package com.example.localshopecommerceapplication;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     Context context;
-    private final ArrayList<CategoryModel> categoryModels;
+    private ArrayList<CategoryModel> categoryModels;
 
     // Constructor
     public CategoryAdapter(Context context, ArrayList<CategoryModel> categoryModels) {
@@ -33,6 +35,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         // To set data to textview and imageview of each card layout
         CategoryModel model = categoryModels.get(position);
+        Log.d("CategoryAdapter", "Displaying category: " + model.getCategoryName());
         holder.txtCategoryName.setText(model.getCategoryName());
     }
 
@@ -46,9 +49,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtCategoryName;
 
-        public ViewHolder(@NonNull View category) {
-            super(category);
-            txtCategoryName = itemView.findViewById(R.id.txtCategoryName);
+        public ViewHolder(@NonNull View view) {
+            super(view);
+            txtCategoryName = view.findViewById(R.id.txtCategoryName);
         }
     }
 }

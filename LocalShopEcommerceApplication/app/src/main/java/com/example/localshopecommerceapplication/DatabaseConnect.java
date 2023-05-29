@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnect extends SQLiteOpenHelper {
     // Declare variables
@@ -31,6 +32,8 @@ public class DatabaseConnect extends SQLiteOpenHelper {
     private static String itemVersion = "version";
     private static String itemSet = "itemSet";
     private static String itemDescription = "description";
+    private static String itemImageFilePath = "imageFilePath";
+    private static String itemInStock = "inStock";
 
     public DatabaseConnect(@Nullable Context context) {
         super(context, dbName, null, dbVersion);
@@ -42,15 +45,15 @@ public class DatabaseConnect extends SQLiteOpenHelper {
                 + " TEXT, " + email + " TEXT PRIMARY KEY, " + password + " TEXT)";
         sqLiteDatabase.execSQL(queryUsers);
 
-        User adminUser = new User("Admin", "Account", "admin@email.com", "account");
-        addUser(adminUser);
+        //User adminUser = new User("Admin", "Account", "admin@email.com", "account");
+        //addUser(adminUser);
 
-        User userUser = new User("User", "Account", "user@email.com", "account");
-        addUser(userUser);
+        //User userUser = new User("User", "Account", "user@email.com", "account");
+        //addUser(userUser);
 
         String queryItems = "create table " + dbTableItems + " (" + itemId + " INTEGER PRIMARY KEY AUTOINCREMENT, " + itemName
-                + " TEXT, " + itemCategory + " TEXT, " + itemPrice + " INTEGER, " + itemVersion + " TEXT, " + itemSet + " TEXT, "
-                + itemDescription + " TEXT)";
+                + " TEXT, " + itemCategory + " TEXT, " + itemPrice + " INTEGER, " + itemVersion + " TEXT, " + itemSet + " TEXT, " + itemImageFilePath + " TEXT, "
+                + itemDescription + " TEXT, " + itemInStock + " INTEGER)";
         sqLiteDatabase.execSQL(queryItems);
     }
  
@@ -166,7 +169,7 @@ public class DatabaseConnect extends SQLiteOpenHelper {
     }
 
     // Functions for items table
-    public void addItem(Item item) {
+    public void addItem(ItemModel item) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -176,13 +179,15 @@ public class DatabaseConnect extends SQLiteOpenHelper {
         values.put(itemPrice, item.getPrice());
         values.put(itemVersion, item.getVersion());
         values.put(itemSet, item.getSet());
+        values.put(itemImageFilePath, item.getImageFilePath());
         values.put(itemDescription, item.getDescription());
+        values.put(itemInStock, item.getInStock());
 
         db.insert(dbTableItems, null, values);
         db.close();
     }
 
-    public boolean updateItem(Item item) {
+    public boolean updateItem(ItemModel item) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -192,7 +197,9 @@ public class DatabaseConnect extends SQLiteOpenHelper {
         values.put(itemPrice, item.getPrice());
         values.put(itemVersion, item.getVersion());
         values.put(itemSet, item.getSet());
+        values.put(itemImageFilePath, item.getImageFilePath());
         values.put(itemDescription, item.getDescription());
+        values.put(itemInStock, item.getInStock());
 
         int updatedItem = db.update(dbTableItems, values, itemId + "=?", new String[]{String.valueOf(item.getId())});
 
@@ -204,7 +211,7 @@ public class DatabaseConnect extends SQLiteOpenHelper {
         }
     }
 
-    public boolean deleteItem(Item item) {
+    public boolean deleteItem(ItemModel item) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         int deleteItem = db.delete(dbTableItems,itemId + "=?", new String[]{String.valueOf(item.getId())});
@@ -217,8 +224,8 @@ public class DatabaseConnect extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<Item> getAllItems() {
-        ArrayList<Item> items = new ArrayList<>();
+    public ArrayList<ItemModel> getAllItems() {
+        ArrayList<ItemModel> items = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + dbTableItems;
 
@@ -232,13 +239,64 @@ public class DatabaseConnect extends SQLiteOpenHelper {
             int columnPrice = cursor.getInt(cursor.getColumnIndexOrThrow((itemPrice)));
             String columnVersion = cursor.getString((cursor.getColumnIndexOrThrow(itemVersion)));
             String columnSet = cursor.getString((cursor.getColumnIndexOrThrow(itemSet)));
+            String columnImageFilePath = cursor.getString((cursor.getColumnIndexOrThrow(itemImageFilePath)));
             String columnDescription = cursor.getString((cursor.getColumnIndexOrThrow(itemDescription)));
+            int columnInStock = cursor.getInt(cursor.getColumnIndexOrThrow((itemInStock)));
 
-            Item item = new Item(columnId, columnName, columnCategory, columnPrice, columnVersion, columnSet, columnDescription);
+            ItemModel item = new ItemModel(columnId, columnName, columnCategory, columnPrice, columnVersion, columnSet, columnImageFilePath, columnDescription, columnInStock);
             items.add(item);
 
             cursor.moveToNext();
         }
         return items;
+    }
+
+    public ArrayList<CategoryModel> getAllCategories() {
+        ArrayList<CategoryModel> categories = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT DISTINCT " + itemCategory + " FROM " + dbTableItems;
+
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        while (cursor.isAfterLast() == false) {
+            String columnName = cursor.getString((cursor.getColumnIndexOrThrow(itemCategory)));
+
+            CategoryModel category = new CategoryModel(columnName);
+            categories.add(category);
+
+            cursor.moveToNext();
+        }
+        return categories;
+    }
+
+    public List<String> getVersionsOfItem(String itemToCheck) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + itemVersion + " FROM " + dbTableItems + " WHERE " + itemName + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{itemToCheck});
+
+        List<String> itemVersions = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            String version = cursor.getString(cursor.getColumnIndexOrThrow(itemVersion));
+            itemVersions.add(version);
+        }
+        cursor.close();
+        return itemVersions;
+    }
+
+    public List<String> getSetsOfItem(String itemToCheck) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + itemSet + " FROM " + dbTableItems + " WHERE " + itemName + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{itemToCheck});
+
+        List<String> itemSets = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            String set = cursor.getString(cursor.getColumnIndexOrThrow(itemSet));
+            itemSets.add(set);
+        }
+        cursor.close();
+        return itemSets;
     }
 }

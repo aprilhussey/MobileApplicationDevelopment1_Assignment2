@@ -114,7 +114,19 @@
             android:layout_marginStart="10dp" />
 
         <ImageButton
-            android:id="@+id/btnEditItem"
+            android:id="@+id/btnRemoveItem"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/placeholder"
+
+            app:layout_constraintEnd_toStartOf="@+id/btnMoveItemToWishlist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageButton
+            android:id="@+id/btnMoveItemToWishlist"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:background="@drawable/placeholder"

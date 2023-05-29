@@ -1,16 +1,18 @@
 package com.example.localshopecommerceapplication;
 
-public class Item {
+public class ItemModel {
     // Declare variables
     private int id;
     private String name;
     private String category;
-    private int price;
+    private double price;
     private String version;
     private String set;
+    private String imageFilePath;
     private String description;
+    private int inStock;
 
-    public Item(int id, String name, String category, int price, String version, String set, String description)
+    public ItemModel(int id, String name, String category, double price, String version, String set, String imageFilePath, String description, int inStock)
     {
         // Initialise variables
         this.id = id;
@@ -19,7 +21,9 @@ public class Item {
         this.price = price;
         this.version = version;
         this.set = set;
+        this.imageFilePath = imageFilePath;
         this.description = description;
+        this.inStock = inStock;
     }
 
     public int getId() {
@@ -46,11 +50,11 @@ public class Item {
         this.category = category;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -70,11 +74,27 @@ public class Item {
         this.set = set;
     }
 
+    public String getImageFilePath() {
+        return imageFilePath;
+    }
+
+    public void setImageFilePath(String imageFilePath) {
+        this.imageFilePath = imageFilePath;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getInStock() {
+        return inStock;
+    }
+
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
     }
 }
