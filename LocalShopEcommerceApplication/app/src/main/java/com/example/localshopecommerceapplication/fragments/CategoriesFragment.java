@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.localshopecommerceapplication.LoginUtils;
 import com.example.localshopecommerceapplication.adapters.CategoryAdapter;
 import com.example.localshopecommerceapplication.models.CategoryModel;
 import com.example.localshopecommerceapplication.db.DatabaseConnect;
@@ -88,6 +89,12 @@ public class CategoriesFragment extends Fragment {
 
         // Setup the recycler view
         setupRecyclerView();
+
+        // Make button visible if admin
+        if (LoginUtils.getCurrentEmail(getContext()).equals("admin@email.com")) {
+            View button = view.findViewById(R.id.addCategoryButton);
+            button.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
