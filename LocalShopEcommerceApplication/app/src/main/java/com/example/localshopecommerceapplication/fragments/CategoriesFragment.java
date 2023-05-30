@@ -92,7 +92,7 @@ public class CategoriesFragment extends Fragment {
 
         // Make button visible if admin
         if (LoginUtils.getCurrentEmail(getContext()).equals("admin@email.com")) {
-            View button = view.findViewById(R.id.addCategoryButton);
+            View button = view.findViewById(R.id.addItemButton);
             button.setVisibility(View.VISIBLE);
         }
 

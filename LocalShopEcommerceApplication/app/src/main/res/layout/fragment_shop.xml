@@ -29,6 +29,7 @@
         app:elevation="6dp"
         android:src="@drawable/plus"
         android:visibility="invisible"
-        android:layout_gravity="bottom|end"/>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"/>
 
 </FrameLayout>
