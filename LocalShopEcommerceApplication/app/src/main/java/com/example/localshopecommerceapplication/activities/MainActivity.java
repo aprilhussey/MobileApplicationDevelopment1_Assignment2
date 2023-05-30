@@ -40,9 +40,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Comment out following line, this is test code
-//        LoginUtils.setLoginStatus(getApplicationContext(), false, "");
-
         dbConnect = new DatabaseConnect(MainActivity.this);
 
         User adminUser = new User("Admin", "Account", "admin@email.com", "account");

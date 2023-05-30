@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.localshopecommerceapplication.LoginUtils;
+import com.example.localshopecommerceapplication.activities.MainActivity;
 import com.example.localshopecommerceapplication.db.DatabaseConnect;
 import com.example.localshopecommerceapplication.adapters.ItemAdapter;
 import com.example.localshopecommerceapplication.models.ItemModel;
@@ -66,6 +69,18 @@ public class ShopFragment extends Fragment {
             View button = view.findViewById(R.id.addItemButton);
             button.setVisibility(View.VISIBLE);
         }
+
+        FloatingActionButton addItemButton = view.findViewById(R.id.addItemButton);
+        addItemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to additem fragment
+                AddItemFragment addItemFragment = new AddItemFragment();
+                MainActivity main = (MainActivity) getActivity();
+                main.getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, addItemFragment).commit();
+            }
+        });
+
 
         return view;
     }
