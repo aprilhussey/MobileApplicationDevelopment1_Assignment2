@@ -25,4 +25,12 @@
 
         android:layout_marginTop="50dp"/>
 
+    <Button
+        android:id="@+id/btnCheckItemsTable"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Check Items Table"
+
+        android:layout_marginTop="100dp"/>
+
 </FrameLayout>

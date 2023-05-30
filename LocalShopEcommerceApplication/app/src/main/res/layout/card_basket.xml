@@ -69,7 +69,7 @@
 
             app:layout_constraintStart_toEndOf="@id/imgItem"
             app:layout_constraintTop_toBottomOf="@+id/txtItemPrice"
-            app:layout_constraintBottom_toTopOf="@+id/txtItemQty"
+            app:layout_constraintBottom_toTopOf="@+id/txtItemSet"
             android:layout_marginStart="10dp" />
 
         <TextView
@@ -81,10 +81,38 @@
             android:text=""
             android:textSize="14sp"
 
-            app:layout_constraintStart_toEndOf="@id/txtItemVer"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/txtItemVer"
             app:layout_constraintBottom_toBottomOf="@id/txtItemVer"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:id="@+id/txtItemSet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SET:"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toEndOf="@id/imgItem"
+            app:layout_constraintTop_toBottomOf="@+id/txtItemVer"
+            app:layout_constraintBottom_toTopOf="@+id/txtItemQty"
             android:layout_marginStart="10dp" />
+
+        <TextView
+            android:id="@+id/txtItemSetTxt"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="lorum ipsum"
+            android:text=""
+            android:textSize="14sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txtItemSet"
+            app:layout_constraintBottom_toBottomOf="@id/txtItemSet"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
 
         <TextView
             android:id="@+id/txtItemQty"
@@ -108,10 +136,9 @@
             android:text=""
             android:textSize="14sp"
 
-            app:layout_constraintStart_toEndOf="@id/txtItemQty"
+            app:layout_constraintStart_toStartOf="@id/txtItemVerTxt"
             app:layout_constraintTop_toTopOf="@id/txtItemQty"
-            app:layout_constraintBottom_toBottomOf="@id/txtItemQty"
-            android:layout_marginStart="10dp" />
+            app:layout_constraintBottom_toBottomOf="@id/txtItemQty" />
 
         <ImageButton
             android:id="@+id/btnRemoveItem"

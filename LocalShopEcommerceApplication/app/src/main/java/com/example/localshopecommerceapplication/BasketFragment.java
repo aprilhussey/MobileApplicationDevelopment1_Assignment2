@@ -3,11 +3,14 @@ package com.example.localshopecommerceapplication;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,10 +61,29 @@ public class BasketFragment extends Fragment {
 
     }
 
+    // Declare variables
+    RecyclerView recyclerView;
+    BasketAdapter basketAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_basket, container, false);
+        View view = inflater.inflate(R.layout.fragment_basket, container, false);
+
+        // Get a reference to the recycler view
+        recyclerView = view.findViewById(R.id.recyclerView);
+
+        // Setup the recycler view
+        setupRecyclerView();
+
+        return view;
+    }
+
+    public void setupRecyclerView() {
+        // Create new array list and add data to it
+        ArrayList<ItemModel> basketModelArrayList = null;
+        basketAdapter = new BasketAdapter(getContext(), basketModelArrayList);    // Initialise adapter class and pass array list to it
+        recyclerView.setAdapter(basketAdapter);   // Set adapter to recycler view
     }
 }

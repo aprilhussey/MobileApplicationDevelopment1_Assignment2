@@ -2,16 +2,17 @@ package com.example.localshopecommerceapplication;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
@@ -20,19 +21,20 @@ import java.util.ArrayList;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     Context context;
     private final ArrayList<ItemModel> itemModels;
-    DatabaseConnect dbConnect = new DatabaseConnect(context.getApplicationContext());
+    DatabaseConnect dbConnect;
 
     // Constructor
     public ItemAdapter(Context context, ArrayList<ItemModel> itemModels) {
         this.context = context;
         this.itemModels = itemModels;
+        this.dbConnect = new DatabaseConnect(context.getApplicationContext());
     }
 
     @NonNull
     @Override
     public ItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // To inflate the layout for each item of recycler view
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_basket, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item, parent, false);
         return new ItemAdapter.ViewHolder(view);
     }
 
@@ -52,6 +54,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         holder.spnItemSet.setAdapter(spnSetAdapter);
 
         holder.imgItem.setImageURI(Uri.fromFile(new File(model.getImageFilePath()))); //String set via database not image resource
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ItemPageFragment itemPageFragment = new ItemPageFragment();
+                Bundle bundle = new Bundle();
+
+                bundle.putString("itemSelected", holder.getItemName());
+                bundle.putInt("verSelected", holder.spnItemVer.getSelectedItemPosition());
+                bundle.putInt("setSelected", holder.spnItemSet.getSelectedItemPosition());
+
+                itemPageFragment.setArguments(bundle);
+
+                ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.flFragment, itemPageFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
     @Override
@@ -69,9 +90,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         ImageView imgItem;
         TextView txtItemStock;
 
-        Button btnAddItemToWishlist;
-        Button btnAddItemToBasket;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtItemName = itemView.findViewById(R.id.txtItemName);
@@ -80,9 +98,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             spnItemSet = itemView.findViewById(R.id.spnItemSet);
             imgItem = itemView.findViewById(R.id.imgItem);
             txtItemStock = itemView.findViewById(R.id.txtItemStock);
+        }
 
-            btnAddItemToWishlist = itemView.findViewById(R.id.btnAddItemToWishlist);
-            btnAddItemToBasket = itemView.findViewById(R.id.btnAddItemToBasket);
+        public String getItemName() {
+            return txtItemName.getText().toString();
         }
     }
 }

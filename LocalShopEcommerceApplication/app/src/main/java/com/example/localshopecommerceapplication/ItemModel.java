@@ -5,14 +5,14 @@ public class ItemModel {
     private int id;
     private String name;
     private String category;
-    private double price;
+    private String price;
     private String version;
     private String set;
     private String imageFilePath;
     private String description;
     private int inStock;
 
-    public ItemModel(int id, String name, String category, double price, String version, String set, String imageFilePath, String description, int inStock)
+    public ItemModel(int id, String name, String category, String price, String version, String set, String imageFilePath, String description, int inStock)
     {
         // Initialise variables
         this.id = id;
@@ -50,11 +50,11 @@ public class ItemModel {
         this.category = category;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

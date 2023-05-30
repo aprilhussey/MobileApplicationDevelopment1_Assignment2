@@ -19,7 +19,6 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class CategoriesFragment extends Fragment {
-    private View view;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,10 +60,6 @@ public class CategoriesFragment extends Fragment {
         dbConnect = new DatabaseConnect(getContext());
     }
 
-    // Declare variables
-    RecyclerView recyclerView;
-    CategoryAdapter categoryAdapter;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,11 +69,15 @@ public class CategoriesFragment extends Fragment {
         }
     }
 
+    // Declare variables
+    RecyclerView recyclerView;
+    CategoryAdapter categoryAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_categories, container, false);
+        View view = inflater.inflate(R.layout.fragment_categories, container, false);
 
         // Get a reference to the recycler view
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -92,10 +91,6 @@ public class CategoriesFragment extends Fragment {
     public void setupRecyclerView() {
         // Create new array list and add data to it
         ArrayList<CategoryModel> categoryModelArrayList = dbConnect.getAllCategories();
-        for (CategoryModel category : categoryModelArrayList) {
-            System.out.println(category.getCategoryName());
-        }
-
         categoryAdapter = new CategoryAdapter(getContext(), categoryModelArrayList);    // Initialise adapter class and pass array list to it
         recyclerView.setAdapter(categoryAdapter);   // Set adapter to recycler view
     }

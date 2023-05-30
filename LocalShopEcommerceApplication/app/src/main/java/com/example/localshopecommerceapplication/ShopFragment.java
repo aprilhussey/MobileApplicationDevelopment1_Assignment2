@@ -1,5 +1,6 @@
 package com.example.localshopecommerceapplication;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -50,10 +51,13 @@ public class ShopFragment extends Fragment {
     }
 
     // Declare variables
-    RecyclerView recyclerView;
-    ArrayList<ItemModel> itemModelArrayList;
-    ItemAdapter itemAdapter;
-    DatabaseConnect dbConnect = new DatabaseConnect(getContext());
+    DatabaseConnect dbConnect;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        dbConnect = new DatabaseConnect(getContext());
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,21 +66,35 @@ public class ShopFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        setupRecyclerView();
     }
 
-    public void setupRecyclerView() {
-        itemModelArrayList = new ArrayList<>();    // Create new array list and add data to it
-        itemModelArrayList = dbConnect.getAllItems();
-
-        itemAdapter = new ItemAdapter(getContext(), itemModelArrayList);    // Initialise adapter class and pass array list to it
-        recyclerView.setAdapter(itemAdapter);   // Set adapter to recycler view
-    }
+    // Declare variables
+    RecyclerView recyclerView;
+    ArrayList<ItemModel> itemModelArrayList;
+    ItemAdapter itemAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+        View view = inflater.inflate(R.layout.fragment_shop, container, false);
+
+        // Get a reference to the recycler view
+        recyclerView = view.findViewById(R.id.recyclerView);
+
+        Bundle bundle = getArguments();
+        String categoryName = bundle.getString("categorySelected");
+
+        // Setup the recycler view
+        setupRecyclerView(categoryName);
+
+        return view;
+    }
+
+    public void setupRecyclerView(String categoryName) {
+        // Create new array list and add data to it
+        ArrayList<ItemModel> itemModelArrayList = dbConnect.getItemsOfCategory(categoryName);
+        itemAdapter = new ItemAdapter(getContext(), itemModelArrayList);    // Initialise adapter class and pass array list to it
+        recyclerView.setAdapter(itemAdapter);   // Set adapter to recycler view
     }
 }

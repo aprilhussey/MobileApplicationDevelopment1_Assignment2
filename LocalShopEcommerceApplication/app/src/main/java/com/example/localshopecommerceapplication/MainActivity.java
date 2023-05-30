@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     // Declare variables
     BottomNavigationView bottomNavigationView;
@@ -19,10 +21,26 @@ public class MainActivity extends AppCompatActivity {
     MenuItem navWishlist;
     MenuItem navAccount;
 
+    ArrayList<ItemModel> basket;
+
+    DatabaseConnect dbConnect;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbConnect = new DatabaseConnect(MainActivity.this);
+
+        User adminUser = new User("Admin", "Account", "admin@email.com", "account");
+        if (!dbConnect.checkIfEmailExists(adminUser.getEmail())) {
+            dbConnect.addUser(adminUser);
+        }
+
+        User userUser = new User("User", "Account", "user@email.com", "account");
+        if (!dbConnect.checkIfEmailExists(userUser.getEmail())) {
+            dbConnect.addUser(userUser);
+        }
 
         boolean loggedIn = LoginUtils.getLoginStatus(MainActivity.this);
 

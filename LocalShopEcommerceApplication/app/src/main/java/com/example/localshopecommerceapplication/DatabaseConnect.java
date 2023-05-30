@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -35,6 +36,9 @@ public class DatabaseConnect extends SQLiteOpenHelper {
     private static String itemImageFilePath = "imageFilePath";
     private static String itemInStock = "inStock";
 
+    // Items in basket table
+    private static String  dbTableItemsInBasket = "itemsInBasket";
+
     public DatabaseConnect(@Nullable Context context) {
         super(context, dbName, null, dbVersion);
     }
@@ -45,14 +49,8 @@ public class DatabaseConnect extends SQLiteOpenHelper {
                 + " TEXT, " + email + " TEXT PRIMARY KEY, " + password + " TEXT)";
         sqLiteDatabase.execSQL(queryUsers);
 
-        //User adminUser = new User("Admin", "Account", "admin@email.com", "account");
-        //addUser(adminUser);
-
-        //User userUser = new User("User", "Account", "user@email.com", "account");
-        //addUser(userUser);
-
         String queryItems = "create table " + dbTableItems + " (" + itemId + " INTEGER PRIMARY KEY AUTOINCREMENT, " + itemName
-                + " TEXT, " + itemCategory + " TEXT, " + itemPrice + " INTEGER, " + itemVersion + " TEXT, " + itemSet + " TEXT, " + itemImageFilePath + " TEXT, "
+                + " TEXT, " + itemCategory + " TEXT, " + itemPrice + " TEXT, " + itemVersion + " TEXT, " + itemSet + " TEXT, " + itemImageFilePath + " TEXT, "
                 + itemDescription + " TEXT, " + itemInStock + " INTEGER)";
         sqLiteDatabase.execSQL(queryItems);
     }
@@ -187,6 +185,43 @@ public class DatabaseConnect extends SQLiteOpenHelper {
         db.close();
     }
 
+    public ItemModel getItem(String selectedItemName, String selectedVer, String selectedSet) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + dbTableItems + " WHERE " + itemName + " = ? AND " + itemVersion + " = ? AND " + itemSet + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{selectedItemName, selectedVer, selectedSet});
+
+        int id;
+        String name;
+        String category;
+        String price;
+        String version;
+        String set;
+        String imageFilePath;
+        String description;
+        int inStock;
+
+        ItemModel item = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Access the values in the returned row using the column index or column name
+                id = cursor.getInt(cursor.getColumnIndex(itemId));
+                name = cursor.getString(cursor.getColumnIndex(itemName));
+                category = cursor.getString(cursor.getColumnIndex(itemCategory));
+                price = cursor.getString(cursor.getColumnIndex(itemPrice));
+                version = cursor.getString(cursor.getColumnIndex(itemVersion));
+                set = cursor.getString(cursor.getColumnIndex(itemSet));
+                imageFilePath = cursor.getString(cursor.getColumnIndex(itemImageFilePath));
+                description = cursor.getString(cursor.getColumnIndex(itemDescription));
+                inStock = cursor.getInt(cursor.getColumnIndex(itemInStock));
+                // Do something with the retrieved data
+            } while (cursor.moveToNext());
+            item = new ItemModel(id, name, category, price, version, set, imageFilePath, description, inStock);
+        }
+        cursor.close();
+        return item;
+    }
+
     public boolean updateItem(ItemModel item) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -236,7 +271,7 @@ public class DatabaseConnect extends SQLiteOpenHelper {
             int columnId = cursor.getInt(cursor.getColumnIndexOrThrow(itemId));
             String columnName = cursor.getString((cursor.getColumnIndexOrThrow(itemName)));
             String columnCategory = cursor.getString((cursor.getColumnIndexOrThrow(itemCategory)));
-            int columnPrice = cursor.getInt(cursor.getColumnIndexOrThrow((itemPrice)));
+            String columnPrice = cursor.getString(cursor.getColumnIndexOrThrow((itemPrice)));
             String columnVersion = cursor.getString((cursor.getColumnIndexOrThrow(itemVersion)));
             String columnSet = cursor.getString((cursor.getColumnIndexOrThrow(itemSet)));
             String columnImageFilePath = cursor.getString((cursor.getColumnIndexOrThrow(itemImageFilePath)));
@@ -248,6 +283,7 @@ public class DatabaseConnect extends SQLiteOpenHelper {
 
             cursor.moveToNext();
         }
+        cursor.close();
         return items;
     }
 
@@ -270,6 +306,52 @@ public class DatabaseConnect extends SQLiteOpenHelper {
         return categories;
     }
 
+    public ArrayList<ItemModel> getItemsOfCategory(String categoryToCheck) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + dbTableItems + " WHERE " + itemCategory + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{categoryToCheck});
+
+        ArrayList<ItemModel> itemsOfCategory = new ArrayList<>();
+
+       if (cursor.moveToFirst()) {
+           do {
+               int columnId = cursor.getInt(cursor.getColumnIndexOrThrow(itemId));
+               String columnName = cursor.getString((cursor.getColumnIndexOrThrow(itemName)));
+               String columnCategory = cursor.getString((cursor.getColumnIndexOrThrow(itemCategory)));
+               String columnPrice = cursor.getString(cursor.getColumnIndexOrThrow((itemPrice)));
+               String columnVersion = cursor.getString((cursor.getColumnIndexOrThrow(itemVersion)));
+               String columnSet = cursor.getString((cursor.getColumnIndexOrThrow(itemSet)));
+               String columnImageFilePath = cursor.getString((cursor.getColumnIndexOrThrow(itemImageFilePath)));
+               String columnDescription = cursor.getString((cursor.getColumnIndexOrThrow(itemDescription)));
+               int columnInStock = cursor.getInt(cursor.getColumnIndexOrThrow((itemInStock)));
+
+               ItemModel item = new ItemModel(columnId, columnName, columnCategory, columnPrice, columnVersion, columnSet, columnImageFilePath, columnDescription, columnInStock);
+               itemsOfCategory.add(item);
+
+           } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return itemsOfCategory;
+    }
+
+    public String getItemPrice(ItemModel item) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + itemPrice + " FROM " + dbTableItems + " WHERE " + itemName + " = ? AND " + itemVersion + " = ? AND " + itemSet + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{item.getName(), item.getVersion(), item.getSet()});
+
+        String price = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Access the values in the returned row using the column index or column name
+                price = cursor.getString(cursor.getColumnIndex(itemPrice));
+                // Do something with the retrieved data
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return price;
+    }
+
     public List<String> getVersionsOfItem(String itemToCheck) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT " + itemVersion + " FROM " + dbTableItems + " WHERE " + itemName + " = ?";
@@ -277,9 +359,11 @@ public class DatabaseConnect extends SQLiteOpenHelper {
 
         List<String> itemVersions = new ArrayList<>();
 
-        while (cursor.moveToNext()) {
-            String version = cursor.getString(cursor.getColumnIndexOrThrow(itemVersion));
-            itemVersions.add(version);
+        if (cursor.moveToFirst()) {
+            do {
+                String version = cursor.getString(cursor.getColumnIndexOrThrow(itemVersion));
+                itemVersions.add(version);
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return itemVersions;
@@ -292,11 +376,70 @@ public class DatabaseConnect extends SQLiteOpenHelper {
 
         List<String> itemSets = new ArrayList<>();
 
-        while (cursor.moveToNext()) {
-            String set = cursor.getString(cursor.getColumnIndexOrThrow(itemSet));
-            itemSets.add(set);
+        if (cursor.moveToFirst()) {
+            do {
+                String set = cursor.getString(cursor.getColumnIndexOrThrow(itemSet));
+                itemSets.add(set);
+            } while (cursor.moveToNext());
         }
         cursor.close();
         return itemSets;
+    }
+
+    public String getItemImageFilePath(ItemModel item) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + itemImageFilePath + " FROM " + dbTableItems + " WHERE " + itemName + " = ? AND " + itemVersion + " = ? AND " + itemSet + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{item.getName(), item.getVersion(), item.getSet()});
+
+        String imageFilePath = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Access the values in the returned row using the column index or column name
+                imageFilePath = cursor.getString(cursor.getColumnIndex(itemImageFilePath));
+                // Do something with the retrieved data
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return imageFilePath;
+    }
+
+    int itemStockInt;
+    String itemStock;
+    public String getInStock(ItemModel item) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + itemInStock + " FROM " + dbTableItems + " WHERE " + itemName + " = ? AND " + itemVersion + " = ? AND " + itemSet + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{item.getName(), item.getVersion(), item.getSet()});
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Access the values in the returned row using the column index or column name
+                itemStockInt = cursor.getInt(cursor.getColumnIndex(itemInStock));
+                // Do something with the retrieved data
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        if (itemStockInt > 0) {
+            itemStock = "In Stock";
+        }
+        else {
+            itemStock = "Out of Stock";
+        }
+
+        return itemStock;
+    }
+
+    public void checkItemsTable() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("PRAGMA table_info(" + dbTableItems + ")", null);
+
+        while (cursor.moveToNext()) {
+            String name = cursor.getString(cursor.getColumnIndex("name"));
+            String type = cursor.getString(cursor.getColumnIndex("type"));
+            // You can also retrieve other column information such as "notnull", "dflt_value", and "pk"
+            Log.d("PRAGMA", "Column name: " + name + ", Column type: " + type);
+        }
+        cursor.close();
     }
 }

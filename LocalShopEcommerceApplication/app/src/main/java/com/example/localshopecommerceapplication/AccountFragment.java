@@ -112,19 +112,29 @@ public class AccountFragment extends Fragment {
                 copyAssets();
                 String MindFlayer_CLB = getAbsolutePathOfImage("MindFlayer_Non-foil_CLB.png");
 
-                ItemModel itemTest1 = new ItemModel(0, "Mind Flayer", "Singles", 0.16, "Non-foil",
+                ItemModel itemTest1 = new ItemModel(0, "Mind Flayer", "Singles", "0.16", "Non-foil",
                         "Commander Legends: Battle for Baldur's Gate", MindFlayer_CLB, "Creature - Horror\n" +
                         "Dominate Monster — When Mind Flayer enters the battlefield, gain control of target creature for as long" +
                         "as you control Mind Flayer.\n“Shed your thoughts and let my will flow through you.”", 1);
                 dbConnect.addItem(itemTest1);
-                ItemModel itemTest2 = new ItemModel(1, "Booster Box", "Booster Boxes", 100.00, "Draft",
+                ItemModel itemTest2 = new ItemModel(1, "Booster Box", "Booster Boxes", "100.00", "Draft",
                         "Commander Legends: Battle for Baldur's Gate", MindFlayer_CLB, "Lorem ipsum", 1);
                 dbConnect.addItem(itemTest2);
-                ItemModel itemTest3 = new ItemModel(2, "Booster Pack", "Boosters", 3.99, "Set",
+                ItemModel itemTest3 = new ItemModel(2, "Booster Pack", "Boosters", "3.99", "Set",
                         "Commander Legends: Battle for Baldur's Gate", MindFlayer_CLB, "Lorem ipsum", 1);
                 dbConnect.addItem(itemTest3);
 
                 Log.d("items added to database", "items added to database");
+            }
+        });
+
+        Button btnCheckItemsTable;
+        btnCheckItemsTable = view.findViewById(R.id.btnCheckItemsTable);
+
+        btnCheckItemsTable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dbConnect.checkItemsTable();
             }
         });
     }
