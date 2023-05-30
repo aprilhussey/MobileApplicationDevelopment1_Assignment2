@@ -82,8 +82,11 @@ public class BasketFragment extends Fragment {
 
     public void setupRecyclerView() {
         // Create new array list and add data to it
-        ArrayList<ItemModel> basketModelArrayList = null;
-        basketAdapter = new BasketAdapter(getContext(), basketModelArrayList);    // Initialise adapter class and pass array list to it
-        recyclerView.setAdapter(basketAdapter);   // Set adapter to recycler view
+        MainActivity main = (MainActivity) getActivity();
+        if (main != null) {
+            ArrayList<ItemModel> basketItems = main.basket;
+            basketAdapter = new BasketAdapter(getContext(), basketItems);    // Initialise adapter class and pass array list to it
+            recyclerView.setAdapter(basketAdapter);   // Set adapter to recycler view
+        }
     }
 }

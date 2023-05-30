@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -50,7 +51,12 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         holder.imgItem.setImageURI(Uri.fromFile(new File(model.getImageFilePath()))); //String set via database not image resource
         holder.txtItemVer.setText(model.getVersion());
         holder.txtItemSet.setText(model.getSet());
-        holder.txtItemStock.setText(model.getInStock());
+        if (model.getInStock() == 1){
+            holder.txtItemStock.setText("In Stock");
+        } else {
+            holder.txtItemStock.setText("Out of Stock");
+        }
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +76,16 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
                         .commit();
             }
         });
+
+        holder.removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Works on the assumption that the itemsInBasket ArrayList is the same order
+                // RecyclerView
+                itemsInBasket.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override
@@ -86,24 +102,21 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.ViewHolder
         TextView txtItemSet;
         ImageView imgItem;
         TextView txtItemStock;
+        ImageButton removeButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtItemName = itemView.findViewById(R.id.txtItemName);
             txtItemPrice = itemView.findViewById(R.id.txtItemPrice);
-            txtItemVer = itemView.findViewById(R.id.txtItemVer);
-            txtItemSet = itemView.findViewById(R.id.txtItemSet);
+            txtItemVer = itemView.findViewById(R.id.txtItemVerTxt);
+            txtItemSet = itemView.findViewById(R.id.txtItemSetTxt);
             imgItem = itemView.findViewById(R.id.imgItem);
             txtItemStock = itemView.findViewById(R.id.txtItemStock);
+            removeButton = itemView.findViewById(R.id.btnRemoveItem);
         }
 
         public String getItemName() {
             return txtItemName.getText().toString();
         }
-    }
-
-    public void addItemToArrayList(ItemModel newItem) {
-        itemsInBasket.add(newItem);
-        notifyDataSetChanged();
     }
 }

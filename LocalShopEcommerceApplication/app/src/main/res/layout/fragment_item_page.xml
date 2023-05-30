@@ -22,21 +22,11 @@
             android:layout_marginTop="10dp" />
 
         <ImageButton
-            android:id="@+id/btnAddItemToWishlist"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="@drawable/placeholder2"
-
-            app:layout_constraintEnd_toStartOf="@id/btnAddItemToBasket"
-            app:layout_constraintTop_toBottomOf="@id/imgItem"
-            app:layout_constraintBottom_toBottomOf="@id/imgItem"
-            android:layout_marginEnd="5dp"/>
-
-        <ImageButton
             android:id="@+id/btnAddItemToBasket"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="@drawable/placeholder2"
+            android:src="@drawable/cart_plus"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgItem"

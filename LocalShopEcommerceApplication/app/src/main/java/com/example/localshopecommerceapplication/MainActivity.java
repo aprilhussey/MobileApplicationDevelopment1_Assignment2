@@ -18,10 +18,9 @@ public class MainActivity extends AppCompatActivity {
     MenuItem navHome;
     MenuItem navShop;
     MenuItem navBasket;
-    MenuItem navWishlist;
     MenuItem navAccount;
 
-    ArrayList<ItemModel> basket;
+    ArrayList<ItemModel> basket = new ArrayList<>();
 
     DatabaseConnect dbConnect;
 
@@ -59,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = new CategoriesFragment();
                     } else if (itemId == R.id.navBasket) {
                         selectedFragment = new BasketFragment();
-                    } else if (itemId == R.id.navWishlist) {
-                        selectedFragment = new WishlistFragment();
                     } else if (itemId == R.id.navAccount) {
                         selectedFragment = new AccountFragment();
                     }
@@ -74,5 +71,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intentLogin = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intentLogin);
         }
+    }
+
+    public void addItemToBasket(ItemModel itemToAdd) {
+        basket.add(itemToAdd);
     }
 }

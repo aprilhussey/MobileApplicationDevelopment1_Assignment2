@@ -77,7 +77,6 @@ public class ItemPageFragment extends Fragment {
 
     // Declare variables
     ImageView imgItem;
-    ImageButton btnAddItemToWishlist;
     ImageButton btnAddItemToBasket;
     TextView txtItemName;
     TextView txtItemPrice;
@@ -96,7 +95,6 @@ public class ItemPageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_page, container, false);
 
         imgItem = view.findViewById(R.id.imgItem);
-        btnAddItemToWishlist = view.findViewById(R.id.btnAddItemToWishlist);
         btnAddItemToBasket = view.findViewById(R.id.btnAddItemToBasket);
         txtItemName = view.findViewById(R.id.txtItemName);
         txtItemPrice = view.findViewById(R.id.txtItemPrice);
@@ -112,7 +110,6 @@ public class ItemPageFragment extends Fragment {
         int spnVerPosition = bundle.getInt("verSelected");
         int spnSetPosition = bundle.getInt("setSelected");
 
-        //btnAddItemToWishlist    // Set
         //btnAddItemToBasket  // Set
         txtItemName.setText(selectedItemName);
 
@@ -136,13 +133,6 @@ public class ItemPageFragment extends Fragment {
 
         txtItemStock.setText(dbConnect.getInStock(item));
 
-        btnAddItemToWishlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // add item to wishlist
-            }
-        });
-
         btnAddItemToBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,7 +141,10 @@ public class ItemPageFragment extends Fragment {
 
                 ItemModel item = dbConnect.getItem(selectedItemName, selectedVer, selectedSet);
 
-                basketAdapter.addItemToArrayList(item);
+                MainActivity main = (MainActivity) getActivity();
+                if (main != null) {
+                    main.addItemToBasket(item);
+                }
             }
         });
 
