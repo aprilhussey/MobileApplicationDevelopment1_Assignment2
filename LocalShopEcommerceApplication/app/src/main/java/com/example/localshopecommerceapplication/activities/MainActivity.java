@@ -1,4 +1,4 @@
-package com.example.localshopecommerceapplication;
+package com.example.localshopecommerceapplication.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.localshopecommerceapplication.db.DatabaseConnect;
+import com.example.localshopecommerceapplication.models.ItemModel;
+import com.example.localshopecommerceapplication.LoginUtils;
+import com.example.localshopecommerceapplication.R;
+import com.example.localshopecommerceapplication.User;
+import com.example.localshopecommerceapplication.fragments.AccountFragment;
+import com.example.localshopecommerceapplication.fragments.BasketFragment;
+import com.example.localshopecommerceapplication.fragments.CategoriesFragment;
+import com.example.localshopecommerceapplication.fragments.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -20,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     MenuItem navBasket;
     MenuItem navAccount;
 
-    ArrayList<ItemModel> basket = new ArrayList<>();
+    public ArrayList<ItemModel> basket = new ArrayList<>();
 
     DatabaseConnect dbConnect;
 

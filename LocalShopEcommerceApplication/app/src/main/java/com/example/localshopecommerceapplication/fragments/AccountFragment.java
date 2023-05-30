@@ -1,4 +1,4 @@
-package com.example.localshopecommerceapplication;
+package com.example.localshopecommerceapplication.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.localshopecommerceapplication.db.DatabaseConnect;
+import com.example.localshopecommerceapplication.models.ItemModel;
+import com.example.localshopecommerceapplication.activities.LoginActivity;
+import com.example.localshopecommerceapplication.LoginUtils;
+import com.example.localshopecommerceapplication.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

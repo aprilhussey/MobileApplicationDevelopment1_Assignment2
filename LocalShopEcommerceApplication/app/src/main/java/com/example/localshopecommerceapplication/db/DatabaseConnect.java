@@ -1,4 +1,4 @@
-package com.example.localshopecommerceapplication;
+package com.example.localshopecommerceapplication.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import com.example.localshopecommerceapplication.models.CategoryModel;
+import com.example.localshopecommerceapplication.models.ItemModel;
+import com.example.localshopecommerceapplication.User;
 
 import java.util.ArrayList;
 import java.util.List;

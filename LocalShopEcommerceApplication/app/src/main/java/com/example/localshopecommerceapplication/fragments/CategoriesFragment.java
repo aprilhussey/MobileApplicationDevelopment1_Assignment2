@@ -1,15 +1,19 @@
-package com.example.localshopecommerceapplication;
+package com.example.localshopecommerceapplication.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.localshopecommerceapplication.adapters.CategoryAdapter;
+import com.example.localshopecommerceapplication.models.CategoryModel;
+import com.example.localshopecommerceapplication.db.DatabaseConnect;
+import com.example.localshopecommerceapplication.R;
 
 import java.util.ArrayList;
 

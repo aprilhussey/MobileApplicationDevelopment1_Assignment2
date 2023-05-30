@@ -1,14 +1,16 @@
-package com.example.localshopecommerceapplication;
+package com.example.localshopecommerceapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.localshopecommerceapplication.db.DatabaseConnect;
+import com.example.localshopecommerceapplication.LoginUtils;
+import com.example.localshopecommerceapplication.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {

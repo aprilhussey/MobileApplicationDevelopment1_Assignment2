@@ -1,4 +1,4 @@
-package com.example.localshopecommerceapplication;
+package com.example.localshopecommerceapplication.models;
 
 public class ItemModel {
     // Declare variables

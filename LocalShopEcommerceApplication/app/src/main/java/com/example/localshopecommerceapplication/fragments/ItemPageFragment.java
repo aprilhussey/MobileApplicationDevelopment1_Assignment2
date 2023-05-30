@@ -1,4 +1,4 @@
-package com.example.localshopecommerceapplication;
+package com.example.localshopecommerceapplication.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,9 +15,14 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.localshopecommerceapplication.adapters.BasketAdapter;
+import com.example.localshopecommerceapplication.db.DatabaseConnect;
+import com.example.localshopecommerceapplication.models.ItemModel;
+import com.example.localshopecommerceapplication.activities.MainActivity;
+import com.example.localshopecommerceapplication.R;
+
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
