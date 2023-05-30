@@ -501,9 +501,8 @@ public class DatabaseConnect extends SQLiteOpenHelper {
     public ArrayList<OrderModel> getOrders(String email) {
         ArrayList<OrderModel> orders = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + dbTableOrders + " WHERE " + orderUser + " = " + email;
-
-        Cursor cursor = db.rawQuery(query, null);
+        String query = "SELECT * FROM " + dbTableOrders + " WHERE " + orderUser + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email});
         cursor.moveToFirst();
 
         while (cursor.isAfterLast() == false) {
