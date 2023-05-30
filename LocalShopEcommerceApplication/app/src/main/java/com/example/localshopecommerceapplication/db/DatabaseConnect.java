@@ -40,8 +40,11 @@ public class DatabaseConnect extends SQLiteOpenHelper {
     private static String itemImageFilePath = "imageFilePath";
     private static String itemInStock = "inStock";
 
-    // Items in basket table
-    private static String  dbTableItemsInBasket = "itemsInBasket";
+    private static String dbTableOrders = "orders";
+    private static String orderId = "id";
+    private static String orderUser = "user";
+    private static String orderItems = "items";
+    private static String orderAddress = "address";
 
     public DatabaseConnect(@Nullable Context context) {
         super(context, dbName, null, dbVersion);
@@ -57,11 +60,16 @@ public class DatabaseConnect extends SQLiteOpenHelper {
                 + " TEXT, " + itemCategory + " TEXT, " + itemPrice + " TEXT, " + itemVersion + " TEXT, " + itemSet + " TEXT, " + itemImageFilePath + " TEXT, "
                 + itemDescription + " TEXT, " + itemInStock + " INTEGER)";
         sqLiteDatabase.execSQL(queryItems);
+
+        String queryOrders = "CREATE TABLE " + dbTableOrders + " (" + orderId + " INTEGER PRIMARY KEY AUTOINCREMENT, " + orderUser + " TEXT, " + orderItems + " TEXT," + orderAddress + " TEXT)";
+        sqLiteDatabase.execSQL(queryOrders);
     }
  
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbTableUsers);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbTableItems);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + dbTableOrders);
         onCreate(sqLiteDatabase);
     }
 
@@ -445,5 +453,24 @@ public class DatabaseConnect extends SQLiteOpenHelper {
             Log.d("PRAGMA", "Column name: " + name + ", Column type: " + type);
         }
         cursor.close();
+    }
+
+    public void addOrder(String address, ArrayList<ItemModel> itemsList, String userEmail) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues values = new ContentValues();
+
+        // Creates a useful text that is used to store items in a "list" seperated by : for example: :1:2:3:
+        StringBuilder items = new StringBuilder();
+        for (ItemModel item : itemsList){
+            items.append(items).append(":").append(item.getId());
+        }
+        items.append(":");
+
+        values.put(orderAddress, address);
+        values.put(orderItems, items.toString());
+        values.put(orderUser, userEmail);
+
+        db.insert(dbTableOrders, null, values);
+        db.close();
     }
 }

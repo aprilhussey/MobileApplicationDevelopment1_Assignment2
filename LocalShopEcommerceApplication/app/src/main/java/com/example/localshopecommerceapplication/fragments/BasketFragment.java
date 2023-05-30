@@ -1,18 +1,30 @@
 package com.example.localshopecommerceapplication.fragments;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.localshopecommerceapplication.LoginUtils;
+import com.example.localshopecommerceapplication.activities.LoginActivity;
 import com.example.localshopecommerceapplication.adapters.BasketAdapter;
+import com.example.localshopecommerceapplication.db.DatabaseConnect;
 import com.example.localshopecommerceapplication.models.ItemModel;
 import com.example.localshopecommerceapplication.activities.MainActivity;
 import com.example.localshopecommerceapplication.R;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -61,8 +73,6 @@ public class BasketFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     // Declare variables
@@ -73,15 +83,43 @@ public class BasketFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_basket, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_basket, container, false);
 
         // Get a reference to the recycler view
-        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = fragmentView.findViewById(R.id.recyclerView);
 
         // Setup the recycler view
         setupRecyclerView();
 
-        return view;
+        Button checkoutButton = fragmentView.findViewById(R.id.checkoutButton);
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText addressInput = fragmentView.findViewById(R.id.addressInput);
+                String address = addressInput.getText().toString();
+                // Basic address check, address has to be 10+ charecters
+                if (address.length() > 10 ) {
+                    // Get current user email:
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+                    String userEmail = sharedPreferences.getString("email", "user@email.com");
+
+                    // Enter to the database and clear the basket, clear address, play toast saying order placed, then navigate to home.
+                    MainActivity main = (MainActivity) getActivity();
+                    DatabaseConnect dbConnect = new DatabaseConnect(getContext());
+                    dbConnect.addOrder(address, main.basket, userEmail);
+                    main.basket = new ArrayList<>();
+
+                    Toast.makeText(getActivity(), "Order placed!", Toast.LENGTH_LONG).show();
+                    BottomNavigationView navView = getActivity().findViewById(R.id.bottomNavigationView);
+                    navView.setSelectedItemId(R.id.navShop);
+                } else {
+                    // Pop up toast saying that address needs to be more than 10 characters
+                    Toast.makeText(getActivity(), "Address has to be more than 10 characters", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        return fragmentView;
     }
 
     public void setupRecyclerView() {

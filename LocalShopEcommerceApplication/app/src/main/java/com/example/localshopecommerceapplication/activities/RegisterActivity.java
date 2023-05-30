@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                         User newUser = new User(strFirstName, strLastName, strEmail, strPassword);
                         dbConnect.addUser(newUser);
 
-                        LoginUtils.setLoginStatus(RegisterActivity.this, true);
+                        LoginUtils.setLoginStatus(RegisterActivity.this, true, strEmail);
 
                         Intent intentHome = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intentHome);

@@ -1,5 +1,7 @@
 package com.example.localshopecommerceapplication.activities;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Comment out following line, this is test code
+//        LoginUtils.setLoginStatus(getApplicationContext(), false, "");
+
         dbConnect = new DatabaseConnect(MainActivity.this);
 
         User adminUser = new User("Admin", "Account", "admin@email.com", "account");
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             dbConnect.addUser(userUser);
         }
 
-        boolean loggedIn = LoginUtils.getLoginStatus(MainActivity.this);
+        boolean loggedIn = LoginUtils.getLoginStatus(getApplicationContext());
 
         if (loggedIn) {
             bottomNavigationView = findViewById(R.id.bottomNavigationView);

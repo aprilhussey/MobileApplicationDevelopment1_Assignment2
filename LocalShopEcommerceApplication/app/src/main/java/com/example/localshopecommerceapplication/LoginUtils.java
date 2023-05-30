@@ -5,10 +5,11 @@ import android.content.SharedPreferences;
 
 public class LoginUtils {
 
-    public static void setLoginStatus(Context context, boolean loggedIn) {
+    public static void setLoginStatus(Context context, boolean loggedIn, String email) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("is_logged_in", loggedIn);
+        editor.putString("email", email);
         editor.apply();
     }
 

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.AccountFragment"
-    android:layout_margin="10dp" >
+    android:layout_margin="10dp"
+    android: android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -21,16 +22,32 @@
         android:id="@+id/btnAddItemsToDb"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Add Items to Database"
-
-        android:layout_marginTop="50dp"/>
+        android:text="Add Items to Database"/>
 
     <Button
         android:id="@+id/btnCheckItemsTable"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Check Items Table"
+        android:text="Check Items Table" />
 
-        android:layout_marginTop="100dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current orders:"/>
 
-</FrameLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="1" />
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</LinearLayout>

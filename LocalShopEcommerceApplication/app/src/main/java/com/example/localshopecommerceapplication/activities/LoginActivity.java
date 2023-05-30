@@ -46,9 +46,10 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     String passwordReceived = dbConnect.passwordCheck(strEmail);
                     if (strPassword.equals(passwordReceived)) {
-                        LoginUtils.setLoginStatus(LoginActivity.this, true);
+                        LoginUtils.setLoginStatus(getApplicationContext(), true, strEmail);
 
-                        Intent intentHome = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intentHome = new Intent(getApplicationContext(), MainActivity.class);
+                        intentHome.putExtra("email", strEmail);
                         startActivity(intentHome);
                     }
                     else {
@@ -65,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentRegister = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intentRegister);
             }
         });

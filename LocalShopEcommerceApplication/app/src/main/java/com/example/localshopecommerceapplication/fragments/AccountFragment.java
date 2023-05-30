@@ -99,12 +99,10 @@ public class AccountFragment extends Fragment {
         // Initialise variables
         btnLogout = view.findViewById(R.id.btnLogout);
 
-        boolean loggedIn = LoginUtils.getLoginStatus(getContext());
-
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LoginUtils.setLoginStatus(getContext(), false);
+                LoginUtils.setLoginStatus(getContext(), false, "");
                 Intent intentLogin = new Intent(getContext(), LoginActivity.class);
                 startActivity(intentLogin);
             }
