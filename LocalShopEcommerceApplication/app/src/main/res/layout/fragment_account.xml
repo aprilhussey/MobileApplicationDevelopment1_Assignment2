@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AccountFragment"
     android:layout_margin="10dp"
-    android: android:orientation="vertical">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btnLogout"

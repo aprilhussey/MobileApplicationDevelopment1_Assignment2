@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import com.example.localshopecommerceapplication.models.CategoryModel;
 import com.example.localshopecommerceapplication.models.ItemModel;
 import com.example.localshopecommerceapplication.User;
+import com.example.localshopecommerceapplication.models.OrderModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -472,5 +473,51 @@ public class DatabaseConnect extends SQLiteOpenHelper {
 
         db.insert(dbTableOrders, null, values);
         db.close();
+    }
+
+    public ArrayList<OrderModel> getAdminOrders() {
+        ArrayList<OrderModel> orders = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + dbTableOrders;
+
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        while (cursor.isAfterLast() == false) {
+            int columnId = cursor.getInt(cursor.getColumnIndexOrThrow(orderId));
+            String columnAddress = cursor.getString((cursor.getColumnIndexOrThrow(orderAddress)));
+            String columnItems = cursor.getString((cursor.getColumnIndexOrThrow(orderItems)));
+            String columnUser = cursor.getString((cursor.getColumnIndexOrThrow(orderUser)));
+
+            OrderModel order = new OrderModel(columnId, columnAddress, columnItems, columnUser);
+            orders.add(order);
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return orders;
+    }
+
+    public ArrayList<OrderModel> getOrders(String email) {
+        ArrayList<OrderModel> orders = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + dbTableOrders + " WHERE " + orderUser + " = " + email;
+
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        while (cursor.isAfterLast() == false) {
+            int columnId = cursor.getInt(cursor.getColumnIndexOrThrow(orderId));
+            String columnAddress = cursor.getString((cursor.getColumnIndexOrThrow(orderAddress)));
+            String columnItems = cursor.getString((cursor.getColumnIndexOrThrow(orderItems)));
+            String columnUser = cursor.getString((cursor.getColumnIndexOrThrow(orderUser)));
+
+            OrderModel order = new OrderModel(columnId, columnAddress, columnItems, columnUser);
+            orders.add(order);
+
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return orders;
     }
 }

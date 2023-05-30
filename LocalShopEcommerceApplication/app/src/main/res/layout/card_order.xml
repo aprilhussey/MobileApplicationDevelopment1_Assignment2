@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/cardOrder"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp" >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/addressTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Address:"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/addressTxtVal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/addressTxt"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="lorem ipsum"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/itemsTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addressTxt"
+            android:text="Items:"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/itemsTxtVal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/itemsTxt"
+            app:layout_constraintTop_toBottomOf="@id/addressTxtVal"
+            android:text="lorem ipsum"
+            android:layout_margin="5dp"/>
+
+        <TextView
+            android:id="@+id/emailTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemsTxt"
+            android:text="Email:"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
+            android:id="@+id/emailTxtVal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/emailTxt"
+            app:layout_constraintTop_toBottomOf="@id/itemsTxt"
+            android:text="lorem ipsum"
+            android:layout_margin="5dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

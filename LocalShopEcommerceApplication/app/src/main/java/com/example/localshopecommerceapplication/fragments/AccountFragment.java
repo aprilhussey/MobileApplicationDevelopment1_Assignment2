@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,63 +14,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.localshopecommerceapplication.adapters.BasketAdapter;
+import com.example.localshopecommerceapplication.adapters.OrderAdapter;
 import com.example.localshopecommerceapplication.db.DatabaseConnect;
 import com.example.localshopecommerceapplication.models.ItemModel;
 import com.example.localshopecommerceapplication.activities.LoginActivity;
 import com.example.localshopecommerceapplication.LoginUtils;
 import com.example.localshopecommerceapplication.R;
+import com.example.localshopecommerceapplication.models.OrderModel;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Locale;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AccountFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AccountFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    RecyclerView recyclerView;
+    OrderAdapter orderAdapter;
 
     public AccountFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AccountFragment newInstance(String param1, String param2) {
-        AccountFragment fragment = new AccountFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -141,6 +113,19 @@ public class AccountFragment extends Fragment {
                 dbConnect.checkItemsTable();
             }
         });
+
+        // Populate orders based on user, if email is admin@email.com (Admin account) populate with ALL orders, else just that user's orders
+        String email = LoginUtils.getCurrentEmail(getContext());
+        DatabaseConnect dbConnect = new DatabaseConnect(getContext());
+        ArrayList<OrderModel> orderModels;
+        if (email.equals("admin@email.com")) {
+            orderModels = dbConnect.getAdminOrders(); //Security flaw! using wildcards as an email address on registration has the same result!
+        } else {
+            orderModels = dbConnect.getOrders(email);
+        }
+        orderAdapter = new OrderAdapter(getContext(), orderModels);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setAdapter(orderAdapter);
     }
 
     private void copyAssets() {

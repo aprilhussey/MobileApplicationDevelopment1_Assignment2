@@ -17,4 +17,9 @@ public class LoginUtils {
         SharedPreferences sharedPreferences = context.getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean("is_logged_in", false);
     }
+
+    public static String getCurrentEmail(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("email", null);
+    }
 }
