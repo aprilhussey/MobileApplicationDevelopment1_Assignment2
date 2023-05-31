@@ -26,6 +26,19 @@ public class ItemModel {
         this.inStock = inStock;
     }
 
+    public ItemModel(String name, String category, String price, String version, String set, String imageFilePath, String description, int inStock)
+    {
+        // Initialise variables
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.version = version;
+        this.set = set;
+        this.imageFilePath = imageFilePath;
+        this.description = description;
+        this.inStock = inStock;
+    }
+
     public int getId() {
         return id;
     }

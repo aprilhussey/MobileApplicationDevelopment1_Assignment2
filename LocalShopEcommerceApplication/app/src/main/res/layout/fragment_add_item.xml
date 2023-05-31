@@ -18,7 +18,7 @@
             android:text="Name: "
             android:layout_margin="5dp"/>
         <EditText
-            android:id="@+id/nameTxt"
+            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="5dp"/>
@@ -34,7 +34,7 @@
             android:text="Category: "
             android:layout_margin="5dp"/>
         <EditText
-            android:id="@+id/categoryTxt"
+            android:id="@+id/edtCategory"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="5dp"/>
@@ -50,7 +50,7 @@
             android:text="Price: "
             android:layout_margin="5dp"/>
         <EditText
-            android:id="@+id/priceTxt"
+            android:id="@+id/edtPrice"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="5dp"/>
@@ -66,7 +66,7 @@
             android:text="Version: "
             android:layout_margin="5dp"/>
         <EditText
-            android:id="@+id/versionTxt"
+            android:id="@+id/edtVersion"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="5dp"/>
@@ -82,7 +82,7 @@
             android:text="Set: "
             android:layout_margin="5dp"/>
         <EditText
-            android:id="@+id/setTxt"
+            android:id="@+id/edtSet"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="5dp"/>
@@ -95,10 +95,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Image Filename: "
+            android:text="Image File Path: "
             android:layout_margin="5dp"/>
         <EditText
-            android:id="@+id/imageFilenameTxt"
+            android:id="@+id/edtImageFilePath"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="5dp"/>
@@ -114,14 +114,26 @@
             android:text="Description: "
             android:layout_margin="5dp"/>
         <EditText
-            android:id="@+id/descriptionTxt"
+            android:id="@+id/edtDescription"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="5dp"/>
     </LinearLayout>
 
     <Button
-        android:id="@+id/addItemButton"
+        android:id="@+id/btnItemInStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Item in Stock" />
+
+    <Button
+        android:id="@+id/btnItemOutOfStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Item Out of Stock" />
+
+    <Button
+        android:id="@+id/btnAddItemToDb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add item" />
