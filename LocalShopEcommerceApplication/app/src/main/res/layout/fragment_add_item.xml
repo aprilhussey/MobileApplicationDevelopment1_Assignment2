@@ -1,141 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.AccountFragment"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
+    android:layout_height="match_parent" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name: "
-            android:layout_margin="5dp"/>
-        <EditText
-            android:id="@+id/edtName"
+        android:layout_height="match_parent"
+        tools:context=".fragments.AccountFragment"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category: "
-            android:layout_margin="5dp"/>
-        <EditText
-            android:id="@+id/edtCategory"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+                android:layout_margin="5dp"/>
+            <EditText
+                android:id="@+id/edtName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Price: "
-            android:layout_margin="5dp"/>
-        <EditText
-            android:id="@+id/edtPrice"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Category: "
+                android:layout_margin="5dp"/>
+            <EditText
+                android:id="@+id/edtCategory"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Version: "
-            android:layout_margin="5dp"/>
-        <EditText
-            android:id="@+id/edtVersion"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: "
+                android:layout_margin="5dp"/>
+            <EditText
+                android:id="@+id/edtPrice"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Set: "
-            android:layout_margin="5dp"/>
-        <EditText
-            android:id="@+id/edtSet"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Version: "
+                android:layout_margin="5dp"/>
+            <EditText
+                android:id="@+id/edtVersion"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Image File Path: "
-            android:layout_margin="5dp"/>
-        <EditText
-            android:id="@+id/edtImageFilePath"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set: "
+                android:layout_margin="5dp"/>
+            <EditText
+                android:id="@+id/edtSet"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description: "
-            android:layout_margin="5dp"/>
-        <EditText
-            android:id="@+id/edtDescription"
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Image File Path: "
+                android:layout_margin="5dp"/>
+            <EditText
+                android:id="@+id/edtImageFilePath"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="5dp"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description: "
+                android:layout_margin="5dp"/>
+            <EditText
+                android:id="@+id/edtDescription"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnItemInStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Item in Stock" />
+
+        <Button
+            android:id="@+id/btnItemOutOfStock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Item Out of Stock" />
+
+        <Button
+            android:id="@+id/btnAddItemToDb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add item" />
+
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btnItemInStock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Item in Stock" />
-
-    <Button
-        android:id="@+id/btnItemOutOfStock"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Item Out of Stock" />
-
-    <Button
-        android:id="@+id/btnAddItemToDb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add item" />
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

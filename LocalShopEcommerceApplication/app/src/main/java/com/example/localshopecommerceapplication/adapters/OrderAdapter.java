@@ -40,28 +40,28 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull OrderAdapter.ViewHolder holder, int position) {
         // To set data to textview and imageview of each card layout
         OrderModel model = orderModels.get(position);
-        holder.address.setText(model.getAddress());
-        holder.items.setText(model.getItems());
-        holder.email.setText(model.getEmail());
+        holder.txtAddress.setText(model.getAddress());
+        holder.txtItems.setText(model.getItems());
+        holder.txtEmail.setText(model.getEmail());
     }
 
     @Override
     public int getItemCount() {
-        // This method is used for showing number of card items in recycler view
+        // This method is used for showing number of card txtItems in recycler view
         return orderModels.size();
     }
 
     // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView address;
-        TextView items;
-        TextView email;
+        TextView txtAddress;
+        TextView txtItems;
+        TextView txtEmail;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            address = itemView.findViewById(R.id.addressTxtVal);
-            items = itemView.findViewById(R.id.itemsTxtVal);
-            email = itemView.findViewById(R.id.emailTxtVal);
+            txtAddress = itemView.findViewById(R.id.txtAddressVal);
+            txtItems = itemView.findViewById(R.id.txtItemsVal);
+            txtEmail = itemView.findViewById(R.id.txtEmailVal);
         }
     }
 }

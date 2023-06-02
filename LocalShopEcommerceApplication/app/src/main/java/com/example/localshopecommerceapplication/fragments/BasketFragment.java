@@ -78,6 +78,7 @@ public class BasketFragment extends Fragment {
     // Declare variables
     RecyclerView recyclerView;
     BasketAdapter basketAdapter;
+    Button btnCheckout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,13 +92,13 @@ public class BasketFragment extends Fragment {
         // Setup the recycler view
         setupRecyclerView();
 
-        Button checkoutButton = fragmentView.findViewById(R.id.checkoutButton);
-        checkoutButton.setOnClickListener(new View.OnClickListener() {
+        btnCheckout = fragmentView.findViewById(R.id.btnCheckout);
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText addressInput = fragmentView.findViewById(R.id.addressInput);
                 String address = addressInput.getText().toString();
-                // Basic address check, address has to be 10+ charecters
+                // Basic address check, address has to be 10+ characters
                 if (address.length() > 10 ) {
                     // Get current user email:
                     SharedPreferences sharedPreferences = getContext().getSharedPreferences("my_preferences", Context.MODE_PRIVATE);

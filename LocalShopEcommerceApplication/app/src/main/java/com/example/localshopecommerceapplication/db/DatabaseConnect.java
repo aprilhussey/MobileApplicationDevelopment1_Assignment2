@@ -321,7 +321,7 @@ public class DatabaseConnect extends SQLiteOpenHelper {
 
     public ArrayList<ItemModel> getItemsOfCategory(String categoryToCheck) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + dbTableItems + " WHERE " + itemCategory + " = ?";
+        String query = "SELECT DISTINCT * FROM " + dbTableItems + " WHERE " + itemCategory + " = ?";
         Cursor cursor = db.rawQuery(query, new String[]{categoryToCheck});
 
         ArrayList<ItemModel> itemsOfCategory = new ArrayList<>();
@@ -417,6 +417,23 @@ public class DatabaseConnect extends SQLiteOpenHelper {
         return imageFilePath;
     }
 
+    String itemDescriptionTxt;
+    public String getItemDescription(ItemModel item) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + itemDescription + " FROM " + dbTableItems + " WHERE " + itemName + " = ? AND " + itemVersion + " = ? AND " + itemSet + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{item.getName(), item.getVersion(), item.getSet()});
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Access the values in the returned row using the column index or column name
+                itemDescriptionTxt = cursor.getString(cursor.getColumnIndex(itemDescription));
+                // Do something with the retrieved data
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return itemDescriptionTxt;
+    }
+
     int itemStockInt;
     String itemStock;
     public String getInStock(ItemModel item) {
@@ -460,12 +477,12 @@ public class DatabaseConnect extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
 
-        // Creates a useful text that is used to store items in a "list" seperated by : for example: :1:2:3:
+        // Creates a useful text that is used to store items in a "list" separated by : for example: :1:2:3:
         StringBuilder items = new StringBuilder();
         for (ItemModel item : itemsList){
-            items.append(items).append(":").append(item.getId());
+            items.append(items).append("Name: ").append(item.getName() + "\nVersion: " + item.getVersion() + "\nSet: " + item.getSet());
         }
-        items.append(":");
+        items.append("\n" + "\n");
 
         values.put(orderAddress, address);
         values.put(orderItems, items.toString());

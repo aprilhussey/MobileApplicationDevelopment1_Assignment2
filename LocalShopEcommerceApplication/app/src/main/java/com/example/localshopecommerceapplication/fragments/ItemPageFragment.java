@@ -136,6 +136,8 @@ public class ItemPageFragment extends Fragment {
         imgItem.setImageURI(Uri.fromFile(new File(dbConnect.getItemImageFilePath(item))));
         txtItemPrice.setText(dbConnect.getItemPrice(item));    // Set look for itemName that has selectedVer and selectedSet
 
+        txtItemDescriptionTxt.setText(dbConnect.getItemDescription(item));
+
         txtItemStock.setText(dbConnect.getInStock(item));
 
         btnAddItemToBasket.setOnClickListener(new View.OnClickListener() {

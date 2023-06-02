@@ -95,16 +95,29 @@
             android:hint="Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/txtDisplayInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="14sp"
+        android:textColor="@color/red"
+
+        app:layout_constraintStart_toStartOf="@+id/layoutPassword"
+        app:layout_constraintEnd_toEndOf="@+id/layoutPassword"
+        app:layout_constraintTop_toBottomOf="@+id/layoutPassword"
+        android:layout_marginTop="15dp"/>
+
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Register"
 
-        app:layout_constraintStart_toStartOf="@+id/layoutPassword"
-        app:layout_constraintEnd_toEndOf="@+id/layoutPassword"
-        app:layout_constraintTop_toBottomOf="@+id/layoutPassword"
-        android:layout_marginTop="25dp" />
+        app:layout_constraintStart_toStartOf="@+id/txtDisplayInfo"
+        app:layout_constraintEnd_toEndOf="@+id/txtDisplayInfo"
+        app:layout_constraintTop_toBottomOf="@+id/txtDisplayInfo"
+        android:layout_marginTop="15dp" />
 
     <Button
         android:id="@+id/btnLogin"

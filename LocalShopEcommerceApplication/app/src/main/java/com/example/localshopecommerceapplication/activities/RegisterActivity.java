@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.localshopecommerceapplication.db.DatabaseConnect;
 import com.example.localshopecommerceapplication.LoginUtils;
@@ -19,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText edtLastName;
     TextInputEditText edtEmail;
     TextInputEditText edtPassword;
+    TextView txtDisplayInfo;
     Button btnRegister;
     Button btnLogin;
 
@@ -32,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         edtLastName = findViewById(R.id.edtLastName);
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
+        txtDisplayInfo = findViewById(R.id.txtDisplayInfo);
         btnRegister = findViewById(R.id.btnRegister);
         btnLogin = findViewById(R.id.btnLogin);
 
@@ -46,14 +49,14 @@ public class RegisterActivity extends AppCompatActivity {
                 String strPassword = edtPassword.getText().toString();
 
                 if (strFirstName.isEmpty() || strLastName.isEmpty() || strEmail.isEmpty() || strPassword.isEmpty()) {
-                    //txtDisplayInfo.setText("All fields are required")
+                    txtDisplayInfo.setText("All fields are required");
                 }
                 else {
                     boolean emailExists = dbConnect.checkIfEmailExists(strEmail);
 
                     if (emailExists)
                     {
-                        //txtDisplayInfo.setText("Account already exists");
+                        txtDisplayInfo.setText("Account already exists");
                     }
                     else {
                         User newUser = new User(strFirstName, strLastName, strEmail, strPassword);

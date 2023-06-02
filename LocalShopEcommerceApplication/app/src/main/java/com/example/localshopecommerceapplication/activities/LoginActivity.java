@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.localshopecommerceapplication.db.DatabaseConnect;
 import com.example.localshopecommerceapplication.LoginUtils;
@@ -17,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     // Declare variables
     TextInputEditText edtEmail;
     TextInputEditText edtPassword;
+    TextView txtDisplayInfo;
     Button btnLogin;
     Button btnRegister;
 
@@ -28,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         // Initialise variables
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
+        txtDisplayInfo = findViewById(R.id.txtDisplayInfo);
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
 
@@ -53,11 +56,11 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intentHome);
                     }
                     else {
-                        //txtDisplayInfo.setText("Incorrect credentials");
+                        txtDisplayInfo.setText("Incorrect credentials");
                     }
                 }
                 else {
-                    //txtDisplayInfo.setText("Account doesn't exist");
+                    txtDisplayInfo.setText("Account doesn't exist");
                 }
 
             }

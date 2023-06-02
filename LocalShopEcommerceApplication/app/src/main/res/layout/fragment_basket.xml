@@ -8,7 +8,7 @@
     tools:context=".fragments.BasketFragment">
 
     <Button
-        android:id="@+id/checkoutButton"
+        android:id="@+id/btnCheckout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="10dp"

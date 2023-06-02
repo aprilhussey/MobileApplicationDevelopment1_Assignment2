@@ -86,19 +86,64 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 copyAssets();
-                String MindFlayer_CLB = getAbsolutePathOfImage("MindFlayer_Non-foil_CLB.png");
 
-                ItemModel itemTest1 = new ItemModel(0, "Mind Flayer", "Singles", "0.16", "Non-foil",
-                        "Commander Legends: Battle for Baldur's Gate", MindFlayer_CLB, "Creature - Horror\n" +
+                String MindFlayer_Nonfoil_CLB = getAbsolutePathOfImage("MindFlayer_Non-foil_CLB.png");
+                ItemModel item_MindFlayer_Nonfoil_CLB = new ItemModel(0, "Mind Flayer", "Singles", "0.20", "Non-foil",
+                        "Commander Legends: Battle for Baldur's Gate", MindFlayer_Nonfoil_CLB, "Creature - Horror\n" +
                         "Dominate Monster — When Mind Flayer enters the battlefield, gain control of target creature for as long" +
                         "as you control Mind Flayer.\n“Shed your thoughts and let my will flow through you.”", 1);
-                dbConnect.addItem(itemTest1);
-                ItemModel itemTest2 = new ItemModel(1, "Booster Box", "Booster Boxes", "100.00", "Draft",
-                        "Commander Legends: Battle for Baldur's Gate", MindFlayer_CLB, "Lorem ipsum", 1);
-                dbConnect.addItem(itemTest2);
-                ItemModel itemTest3 = new ItemModel(2, "Booster Pack", "Boosters", "3.99", "Set",
-                        "Commander Legends: Battle for Baldur's Gate", MindFlayer_CLB, "Lorem ipsum", 1);
-                dbConnect.addItem(itemTest3);
+                dbConnect.addItem(item_MindFlayer_Nonfoil_CLB);
+
+                String GiadaFontOfHope_NonfoilAltArt_SNC = getAbsolutePathOfImage("GiadaFontOfHope_Non-foilAltArt_SNC.png");
+                ItemModel item_GiadaFontOfHope_NonfoilAltArt_SNC = new ItemModel(1, "Giada, Font of Hope", "Singles", "2.20", "Non-foil Alt. art",
+                        "Streets of New Capenna", GiadaFontOfHope_NonfoilAltArt_SNC, "Legendary Creature - Angel\n" +
+                        "Flying, vigilance\n" + "Each other Angel you control enters the battlefield with an additional +1/+1 counter" +
+                        " on it for each Angel you already control.\n" + "{T}: Add {W}. Spend this mana only to cast an Angel spell.", 1);
+                dbConnect.addItem(item_GiadaFontOfHope_NonfoilAltArt_SNC);
+
+                String GiadaFontOfHope_Nonfoil_SNC = getAbsolutePathOfImage("GiadaFontOfHope_Non-foil_SNC.png");
+                ItemModel item_GiadaFontOfHope_Nonfoil_SNC = new ItemModel(2, "Giada, Font of Hope", "Singles", "2.70", "Non-foil",
+                        "Streets of New Capenna", GiadaFontOfHope_Nonfoil_SNC, "Legendary Creature - Angel\n" +
+                        "Flying, vigilance\n" + "Each other Angel you control enters the battlefield with an additional +1/+1 counter" +
+                        " on it for each Angel you already control.\n" + "{T}: Add {W}. Spend this mana only to cast an Angel spell.", 1);
+                dbConnect.addItem(item_GiadaFontOfHope_Nonfoil_SNC);
+
+                String KrenkoMobBoss_Nonfoil_JMP = getAbsolutePathOfImage("KrenkoMobBoss_Non-foil_JMP.png");
+                ItemModel item_KrenkoMobBoss_Nonfoil_JMP = new ItemModel(3, "Krenko, Mob Boss", "Singles", "4.99", "Non-foil",
+                        "Jumpstart", KrenkoMobBoss_Nonfoil_JMP, "Legendary Creature - Goblin Warrior\n" +
+                        "{T}: Create X 1/1 red Goblin creature tokens, where X is the number of Goblins you control.\n" +
+                        "“He displays a perverse charisma fueled by avarice. Highly dangerous. Recommend civil sanctions.”\n" +
+                        "—Agmand Sarv, Azorius hussar", 1);
+                dbConnect.addItem(item_KrenkoMobBoss_Nonfoil_JMP);
+
+                String LathrilBladeOfTheElves_Foil_KHC = getAbsolutePathOfImage("LathrilBladeOfTheElves_Foil_KHC.png");
+                ItemModel item_LathrilBladeOfTheElves_Foil_KHC = new ItemModel(4, "Lathril, Blade of the Elves", "Singles", "4.50", "Foil",
+                        "Kaldheim Commander", LathrilBladeOfTheElves_Foil_KHC, "Legendary Creature - Elf Noble\n" +
+                        "Menace\n" + "Whenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.\n"
+                        + "{T}, Tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life.", 1);
+                dbConnect.addItem(item_LathrilBladeOfTheElves_Foil_KHC);
+
+                String BoosterBox_Set_MID = getAbsolutePathOfImage("BoosterBox_Set_MID.png");
+                ItemModel item_BoosterBox_Set_MID = new ItemModel(5, "Innistrad: Midnight Hunt Booster Box", "Booster Boxes", "90.00", "Set",
+                        "Innistrad: Midnight Hunt", BoosterBox_Set_MID, "Become what you fear in a gothic horror set overrun with werewolves, warlocks, and spooky mechanics.\n"
+                        + "Each pack contains 12 Magic cards (360 Magic cards total).\n" + "1–4 Rares and/or Mythic Rares in every pack.\n" + "At least 1 traditional foil card in every pack.",
+                        1);
+                dbConnect.addItem(item_BoosterBox_Set_MID);
+
+                String BoosterBox_Draft_MID = getAbsolutePathOfImage("BoosterBox_Draft_MID.png");
+                ItemModel item_BoosterBox_Draft_MID = new ItemModel(6, "Innistrad: Midnight Hunt Booster Box", "Booster Boxes", "90.00", "Draft",
+                        "Innistrad: Midnight Hunt", BoosterBox_Draft_MID, "Become what you fear in a gothic horror set overrun with werewolves, warlocks, and spooky mechanics.\n"
+                        + "Each pack contains 15 Magic cards (540 Magic cards total).\n" + "Find 2 double-faced cards in every booster.\n" + "1 Eternal Night full-art basic land in every pack.",
+                        1);
+                dbConnect.addItem(item_BoosterBox_Draft_MID);
+
+
+                String Booster_Collector_DMU = getAbsolutePathOfImage("Booster_Collector_DMU.png");
+                ItemModel item_Booster_Collector_DMU = new ItemModel(7, "Dominaria United Booster", "Boosters", "21.00", "Collector",
+                        "Dominaria United", Booster_Collector_DMU, "Return to Magic’s home plane in a set full of your favorite MTG legends and heroes\n"
+                        + "15 Dominaria United cards and 1 foil token\n" + "5–6 cards of rarity Rare or higher\n" + "10–13 foil cards in every pack, including at least 2 foil Legendary Creatures\n"
+                        + "Lost Legends—card from the 1994 set, Legends, in 3% of Collector Boosters\n" + "Full of rares, foils and special treatments", 1);
+                dbConnect.addItem(item_Booster_Collector_DMU);
 
                 Log.d("items added to database", "items added to database");
             }
@@ -140,11 +185,9 @@ public class AccountFragment extends Fragment {
         }
 
         if (files != null) for (String filename : files) {
-            // Skip directories
-            try {
-                if (assetManager.list(filename) != null) continue;
-            } catch (IOException e) {
-                Log.e("tag", "Failed to check if asset is a directory: " + filename, e);
+            if (filename.equals("images") || filename.equals("webkit")) {
+                Log.d("tag", "Skipping directory: " + filename);
+                continue;
             }
 
             InputStream in = null;
